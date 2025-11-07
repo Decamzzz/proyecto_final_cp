@@ -1,0 +1,134 @@
+<div class="login-container">
+  <div class="login-content">
+    <!-- Sección de imagen -->
+    <div class="image-section">
+      <img 
+        src="https://images.unsplash.com/photo-1529419412599-7bb870e11810?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=387"  
+        alt="Imagen de registro"
+        class="login-image"
+      />
+    </div>
+
+    <!-- Sección del formulario -->
+    <div class="form-section">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>REGISTRATE</h2>
+          <p>INGRESA TUS DATOS PARA CREAR UNA CUENTA</p>
+        </div>
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-fluid">
+          <!-- Campo de usuario -->
+          <div class="p-field">
+            <label for="usuario" class="p-label">
+              Usuario
+            </label>
+            <input 
+              id="usuario" 
+              type="text" 
+              pInputText 
+              formControlName="usuario" 
+              placeholder="Ingresa tu usuario"
+              class="p-inputtext-lg" 
+            />
+            <small 
+              *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="loginForm.get('usuario')?.errors?.['required']">
+                El usuario es obligatorio
+              </span>
+              <span *ngIf="loginForm.get('usuario')?.errors?.['minlength']">
+                El usuario debe tener al menos 3 caracteres
+              </span>
+            </small>
+          </div>
+
+          <!-- Campo de contraseña -->
+          <div class="p-field">
+            <label for="contrasena" class="p-label">
+              Contraseña
+            </label>
+            <div class="p-inputgroup1">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                pInputText 
+                formControlName="contrasena" 
+                placeholder="Ingresa tu contraseña"
+                class="p-inputtext-lg" 
+              />
+              <button
+                type="button" 
+                pButton 
+                icon="pi {{ showPassword ? 'pi-eye-slash' : 'pi-eye' }}" 
+                class="p-button-lg"
+                (click)="togglePasswordVisibility()"
+              >
+              </button>
+            </div>
+          <small 
+            *ngIf="loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched" 
+            class="p-error"
+            >
+            <span *ngIf="loginForm.get('contrasena')?.errors?.['required']">
+            La contraseña es obligatoria
+            </span>
+            <span *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">
+            La contraseña debe tener al menos 6 caracteres
+            </span>
+         </small>
+            
+            <div class="p-inputgroup2">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                pInputText 
+                formControlName="contrasena" 
+                placeholder="Confirma tu contraseña"
+                class="p-inputtext-lg" 
+              />
+              <button
+                type="button" 
+                pButton 
+                icon="pi {{ showPassword ? 'pi-eye-slash' : 'pi-eye' }}" 
+                class="p-button-lg"
+                (click)="togglePasswordVisibility()"
+              >
+              </button>
+            </div>
+          <small 
+            *ngIf="loginForm.get('contrasena')?.invalid && loginForm.get('contrasena')?.touched" 
+            class="p-error"
+            >
+            <span *ngIf="loginForm.get('contrasena')?.errors?.['required']">
+            Confirmar contraseña es obligatorio
+            </span>
+          </small>
+          </div>
+
+          <!-- Botones -->
+          <div class="buttons-container">
+            <button
+              pButton 
+              type="submit" 
+              label="Registrarse" 
+              class="p-button-lg register-button"
+              [disabled]="loginForm.invalid"
+            >
+            </button>
+
+            <hr/>
+
+            <button 
+              pButton 
+              type="button" 
+              label="Volver" 
+              class="p-button-lg volver-button"
+              (click)="onVolver()"
+            >
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
