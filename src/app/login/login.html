@@ -3,7 +3,7 @@
     <!-- Sección de imagen -->
     <div class="image-section">
         <img 
-        src="https://plus.unsplash.com/premium_photo-1673264933212-d78737f38e48?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=387"  
+        src="https://prohealth.apollohospitals.com/assets/images/book-appointment-bg.png"
         class="login-image"
         />
     </div>
@@ -12,22 +12,45 @@
     <div class="form-section">
       <div class="form-container">
         <div class="form-header">
-          <h2>BIENVENIDO</h2>
-          <p>INGRESA A TU CUENTA PARA CONTINUAR</p>
+          <h2>Bienvenido</h2>
+          <p>Ingresa a tu cuenta para continuar</p>
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-fluid">
           <!-- Campo de usuario -->
           <div class="p-field">
+            <label for="rol" class="p-label">
+                <i class="pi pi-user"></i>
+                Seleccion de rol
+            </label>
+            <p-select
+                id="rol"
+                [options]="roles"
+                formControlName="seleccionRol"
+                placeholder="Selecciona tu rol"
+                optionLabel="label"
+                styleClass="w-full"
+            ></p-select>
+            <small 
+              *ngIf="loginForm.get('seleccionRol')?.invalid && loginForm.get('seleccionRol')?.touched" 
+              class="p-error">
+              <span *ngIf="loginForm.get('seleccionRol')?.errors?.['required']">
+                La seleccion de rol es obligatoria
+              </span>
+            </small>
+
+            <hr>
+
             <label for="usuario" class="p-label">
-              Usuario
+              <i class="pi pi-id-card"></i>
+              Numero de identificación
             </label>
             <input 
                 id="usuario" 
                 type="text" 
                 pInputText 
                 formControlName="usuario" 
-                placeholder="Ingresa tu usuario"
+                placeholder="Ingresa tu numero de identificación"
                 class="p-inputtext-lg" />
             <small 
               *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched" 
@@ -44,6 +67,7 @@
           <!-- Campo de contraseña -->
           <div class="p-field">
             <label for="contrasena" class="p-label">
+              <i class="pi pi-lock"></i>
               Contraseña
             </label>
             <div class="p-inputgroup">
@@ -57,7 +81,7 @@
                   type="button" 
                   pButton 
                   icon="pi {{ showPassword ? 'pi-eye-slash' : 'pi-eye' }}" 
-                  class="p-button-lg"
+                  class="p-button-text toggle-password"
                   (click)="togglePasswordVisibility()">
                 </button>
             </div>

@@ -8,6 +8,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { MessageModule } from 'primeng/message';
+import { SelectModule } from 'primeng/select';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +20,8 @@ import { Router } from '@angular/router';
     PasswordModule,
     ButtonModule,
     DividerModule,
-    MessageModule
+    MessageModule,
+    SelectModule
   ],
   standalone: true,
   templateUrl: './login.html',
@@ -29,10 +31,17 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword: boolean = false;
 
+  roles = [
+    { label: 'Administrador', value: 'Administrador' },
+    { label: 'Medico', value: 'Medico' },
+    { label: 'Paciente', value: 'Paciente' },
+  ];
+
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       usuario: ['', [Validators.required, Validators.minLength(3)]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]]
+      contrasena: ['', [Validators.required, Validators.minLength(6)]],
+      seleccionRol: ['', [Validators.required]]
     });
   }
 

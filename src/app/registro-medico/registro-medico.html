@@ -5,7 +5,7 @@
     <div class="form-section">
       <div class="form-container">
         <div class="form-header">
-          <h2>Registro de Usuario</h2>
+          <h2>Registro de Medico</h2>
           <p>Completa tus datos para crear una cuenta</p>
         </div>
         
@@ -179,6 +179,29 @@
             </div>
 
             <div class="p-field p-col-6">
+              <label for="numeroTarjetaProfesional" class="p-label">
+                <i class="pi pi-id-card"></i>
+                N° Tarjeta Profesional *
+              </label>
+              <input 
+                id="numeroTarjetaProfesional" 
+                type="text" 
+                pInputText 
+                formControlName="numeroTarjetaProfesional"
+                placeholder="Número de tarjeta profesional"
+                class="p-inputtext-lg" 
+              />
+              <small
+                *ngIf="registroForm.get('numeroTarjetaProfesional')?.invalid && registroForm.get('numeroTarjetaProfesional')?.touched" 
+                class="p-error"
+              >
+                <span *ngIf="registroForm.get('numeroTarjetaProfesional')?.errors?.['required']">
+                  El número de tarjeta profesional es obligatorio
+                </span>
+              </small>
+            </div>
+
+            <div class="p-field p-col-6">
               <label for="telefono" class="p-label">
                 <i class="pi pi-phone"></i>
                 Teléfono *
@@ -202,112 +225,43 @@
             </div>
           </div>
 
-          <!-- Cuarta fila: Fecha Nacimiento y Género -->
-          <div class="form-row">
             <div class="p-field p-col-6">
-              <label for="fechaNacimiento" class="p-label">
-                <i class="pi pi-calendar"></i>
-                Fecha de Nacimiento *
-              </label>
-              <p-datepicker
-                id="fechaNacimiento"
-                formControlName="fechaNacimiento"
-                [maxDate]="maxDate"
-                [showIcon]="true"
-                placeholder="Selecciona tu fecha de nacimiento"
-                inputId="icon"
-                class="w-100"
-              ></p-datepicker>
-              <small 
-                *ngIf="registroForm.get('fechaNacimiento')?.invalid && registroForm.get('fechaNacimiento')?.touched" 
-                class="p-error"
-              >
-                <span *ngIf="registroForm.get('fechaNacimiento')?.errors?.['required']">
-                  La fecha de nacimiento es obligatoria
-                </span>
-              </small>
+                <label for="Consultorio" class="p-label">
+                    <i class="pi pi-building"></i>
+                    Consultorio *
+                </label>
+                <input 
+                    id="consultorio" 
+                    type="text" 
+                    pInputText 
+                    formControlName="consultorio"
+                    placeholder="Consultorio"
+                    class="p-inputtext-lg" 
+                />
+                <small
+                    *ngIf="registroForm.get('consultorio')?.invalid && registroForm.get('consultorio')?.touched" 
+                    class="p-error"
+                >
+                    <span *ngIf="registroForm.get('consultorio')?.errors?.['required']">
+                    El consultorio es obligatorio
+                    </span>
+                </small>
             </div>
 
             <div class="p-field p-col-6">
-              <label for="genero" class="p-label">
-                <i class="pi pi-users"></i>
-                Género *
-              </label>
-              <p-select
-                id="genero"
-                formControlName="genero"
-                [options]="generos"
-                placeholder="Selecciona tu género"
-                optionLabel="label"
-                styleClass="w-full"
-              ></p-select>
-              <small 
-                *ngIf="registroForm.get('genero')?.invalid && registroForm.get('genero')?.touched" 
-                class="p-error"
-              >
-                <span *ngIf="registroForm.get('genero')?.errors?.['required']">
-                  El género es obligatorio
-                </span>
-              </small>
+                <label for="Especializacion" class="p-label">
+                    <i class="pi pi-crown"></i>
+                    Especializacion *
+                </label>
+                <input 
+                    id="especializacion" 
+                    type="text" 
+                    pInputText 
+                    formControlName="especializacion"
+                    placeholder="Especializacion (opcional)"
+                    class="p-inputtext-lg" 
+                />
             </div>
-          </div>
-
-          <!-- Quinta fila: Grupo Sanguíneo y Dirección -->
-          <div class="form-row">
-            <div class="p-field p-col-6">
-              <label for="grupoSanguineo" class="p-label">
-                <i class="pi pi-heart"></i>
-                Grupo Sanguíneo *
-              </label>
-              <p-select
-                id="grupoSanguineo"
-                formControlName="grupoSanguineo"
-                [options]="gruposSanguineos"
-                placeholder="Selecciona grupo sanguíneo"
-                optionLabel="label"
-                styleClass="w-full"
-              ></p-select>
-              <small 
-                *ngIf="registroForm.get('grupoSanguineo')?.invalid && registroForm.get('grupoSanguineo')?.touched" 
-                class="p-error"
-              >
-                <span *ngIf="registroForm.get('grupoSanguineo')?.errors?.['required']">
-                  El grupo sanguíneo es obligatorio
-                </span>
-              </small>
-            </div>
-
-            <div class="p-field p-col-6">
-              <label for="direccion" class="p-label">
-                <i class="pi pi-home"></i>
-                Dirección
-              </label>
-              <input 
-                id="direccion" 
-                type="text" 
-                pInputText 
-                formControlName="direccion" 
-                placeholder="Dirección (opcional)"
-                class="p-inputtext-lg" 
-              />
-            </div>
-          </div>
-
-          <!-- Alergias -->
-          <div class="p-field">
-            <label for="alergias" class="p-label">
-              <i class="pi pi-info-circle"></i>
-              Alergias Conocidas
-            </label>
-            <textarea
-              id="alergias"
-              pInputTextarea
-              formControlName="alergias"
-              placeholder="Lista tus alergias conocidas (opcional)"
-              [rows]="3"
-              class="p-inputtext-lg"
-            ></textarea>
-          </div>
 
           <!-- Botones -->
           <div class="buttons-container">

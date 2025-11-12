@@ -28,10 +28,10 @@ import { DividerModule } from 'primeng/divider';
     TextareaModule,
     DividerModule
   ],
-  templateUrl: './registro.html',
-  styleUrls: ['./registro.css']
+  templateUrl: './registro-medico.html',
+  styleUrls: ['./registro-medico.css']
 })
-export class RegistroComponent {
+export class RegistroMedicoComponent {
   registroForm: FormGroup;
   showPassword: boolean = false;
   maxDate: Date;
@@ -67,12 +67,10 @@ export class RegistroComponent {
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
       confirmarContrasena: ['', [Validators.required]],
       numeroIdentificacion: ['', [Validators.required, Validators.minLength(5)]],
-      fechaNacimiento: ['', [Validators.required]],
+      numeroTarjetaProfesional: ['', [Validators.required, Validators.minLength(5)]],
+      consultorio: ['', [Validators.required]],
+      especializacion: [''],
       telefono: ['', [Validators.required]],
-      direccion: [''],
-      genero: ['', [Validators.required]],
-      grupoSanguineo: ['', [Validators.required]],
-      alergias: ['']
     }, { validators: this.passwordMatchValidator });
   }
 

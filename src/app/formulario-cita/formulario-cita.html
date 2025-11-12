@@ -1,0 +1,140 @@
+<div class="agendacion-container">
+  <div class="agendacion-content">
+    <!-- Sección del formulario -->
+    <div class="form-section">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>Agendación de Citas</h2>
+          <p>Llena los datos del formulario para solicitar una cita</p>
+        </div>
+        
+        <form [formGroup]="agendacionForm" (ngSubmit)="onSubmit()" class="p-fluid form-grid">
+          <!-- Número de tarjeta profesional -->
+          <div class="p-field">
+            <label for="tarjetaProfesional" class="p-label">
+              <i class="pi pi-id-card"></i>
+              Número de tarjeta profesional *
+            </label>
+            <input 
+              id="tarjetaProfesional" 
+              type="text" 
+              pInputText 
+              formControlName="tarjetaProfesional" 
+              placeholder="Ingresa el número de tarjeta profesional del médico"
+              class="p-inputtext-lg" 
+            />
+            <small 
+              *ngIf="agendacionForm.get('tarjetaProfesional')?.invalid && agendacionForm.get('tarjetaProfesional')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="agendacionForm.get('tarjetaProfesional')?.errors?.['required']">
+                El número de tarjeta profesional del médico es obligatorio
+              </span>
+            </small>
+          </div>
+
+          <!-- Fecha y Hora de la cita -->
+          <div class="form-row">
+            <div class="p-field p-col-6">
+              <label for="fechaCita" class="p-label">
+                <i class="pi pi-calendar"></i>
+                Fecha de la cita *
+              </label>
+              <p-datePicker
+                id="fechaCita"
+                formControlName="fechaCita"
+                [showIcon]="true"
+                [minDate]="minDate"
+                placeholder="Selecciona la fecha"
+                styleClass="w-full"
+              ></p-datePicker>
+              <small 
+                *ngIf="agendacionForm.get('fechaCita')?.invalid && agendacionForm.get('fechaCita')?.touched" 
+                class="p-error"
+              >
+                <span *ngIf="agendacionForm.get('fechaCita')?.errors?.['required']">
+                  La fecha de la cita es obligatoria
+                </span>
+              </small>
+            </div>
+
+            <div class="p-field p-col-6">
+              <label for="horaCita" class="p-label">
+                <i class="pi pi-clock"></i>
+                Hora de la cita *
+              </label>
+              <p-select
+                id="horaCita"
+                formControlName="horaCita"
+                [options]="horasDisponibles"
+                placeholder="Selecciona la hora"
+                optionLabel="label"
+                styleClass="w-full"
+              ></p-select>
+              <small 
+                *ngIf="agendacionForm.get('horaCita')?.invalid && agendacionForm.get('horaCita')?.touched" 
+                class="p-error"
+              >
+                <span *ngIf="agendacionForm.get('horaCita')?.errors?.['required']">
+                  La hora de la cita es obligatoria
+                </span>
+              </small>
+            </div>
+          </div>
+
+          <!-- Motivo de la consulta -->
+          <div class="p-field">
+            <label for="motivoConsulta" class="p-label">
+              <i class="pi pi-file-edit"></i>
+              Motivo de la consulta *
+            </label>
+            <textarea
+              id="motivoConsulta"
+              pInputTextarea
+              formControlName="motivoConsulta"
+              placeholder="Describe el motivo de tu consulta"
+              [rows]="4"
+              class="p-inputtext-lg"
+            ></textarea>
+            <small 
+              *ngIf="agendacionForm.get('motivoConsulta')?.invalid && agendacionForm.get('motivoConsulta')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="agendacionForm.get('motivoConsulta')?.errors?.['required']">
+                El motivo de la consulta es obligatorio
+              </span>
+              <span *ngIf="agendacionForm.get('motivoConsulta')?.errors?.['minlength']">
+                Mínimo 10 caracteres
+              </span>
+            </small>
+          </div>
+
+          <!-- Botones -->
+          <div class="buttons-container">
+            <button
+              pButton 
+              type="submit" 
+              label="Enviar Solicitud" 
+              class="p-button-lg enviar-button"
+              [disabled]="agendacionForm.invalid"
+            >
+            </button>
+
+            <p-divider align="center">
+              <span class="p-tag">o</span>
+            </p-divider>
+
+            <button 
+              pButton 
+              type="button" 
+              label="Volver" 
+              class="p-button-lg volver-button"
+              (click)="onVolver()"
+            >
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
