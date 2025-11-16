@@ -30,6 +30,7 @@
                 placeholder="Selecciona tu rol"
                 optionLabel="label"
                 styleClass="w-full"
+                optionValue="value"
             ></p-select>
             <small 
               *ngIf="loginForm.get('seleccionRol')?.invalid && loginForm.get('seleccionRol')?.touched" 
@@ -132,4 +133,5 @@
       </div>
     </div>
   </div>
+<p-toast></p-toast>
 </div>

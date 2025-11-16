@@ -139,14 +139,6 @@
               placeholder="Número de teléfono"
               class="p-inputtext-lg" 
             />
-            <small 
-              *ngIf="actualizacionForm.get('telefono')?.invalid && actualizacionForm.get('telefono')?.touched" 
-              class="p-error"
-            >
-              <span *ngIf="actualizacionForm.get('telefono')?.errors?.['required']">
-                El teléfono es obligatorio
-              </span>
-            </small>
           </div>
 
           <!-- Dirección -->

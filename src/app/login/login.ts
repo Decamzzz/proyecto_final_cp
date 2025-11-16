@@ -123,18 +123,23 @@ export class LoginComponent {
   }
 
   private redirigirSegunRol(rol: string) {
+    console.log('Redirigiendo según rol:', rol);
     switch(rol) {
       case 'Administrador':
         this.router.navigate(['/admin-dashboard']);
+        console.log('Redirigiendo a admin-dashboard');
         break;
       case 'Medico':
         this.router.navigate(['/medico-dashboard']);
+        console.log('Redirigiendo a medico-dashboard');
         break;
       case 'Paciente':
         this.router.navigate(['/paciente-dashboard']);
+        console.log('Redirigiendo a paciente-dashboard');
         break;
       default:
         this.router.navigate(['/dashboard']);
+        console.log('Redirigiendo a default-dashboard');
     }
   }
 

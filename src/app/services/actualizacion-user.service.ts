@@ -12,11 +12,36 @@ export class ActualizacionUserService {
   constructor(private http: HttpClient) { }
 
   actualizarUsuario(datos: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/actualizar`, datos);
+    // Limpiar datos antes de enviar - remover campos undefined o vacíos
+    const datosLimpios = this.limpiarDatosActualizacion(datos);
+    console.log('Datos limpios para actualizar:', datosLimpios);
+    
+    return this.http.put(`${this.apiUrl}/actualizar`, datosLimpios);
   }
 
-  // Opcional: Obtener datos del usuario por ID
-  obtenerUsuarioPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/obtener/${id}`);
+  private limpiarDatosActualizacion(datos: any): any {
+    const datosLimpios: any = {
+      Id: datos.id,
+      ContrasenaActual: datos.contrasenaActual
+    };
+
+    // Solo incluir campos que tengan valor
+    if (datos.correo && datos.correo.trim() !== '') {
+      datosLimpios.Correo = datos.correo;
+    }
+
+    if (datos.nuevaContrasena && datos.nuevaContrasena.trim() !== '') {
+      datosLimpios.NuevaContrasena = datos.nuevaContrasena;
+    }
+
+    if (datos.telefono && datos.telefono.trim() !== '') {
+      datosLimpios.Telefono = datos.telefono;
+    }
+
+    // Campos opcionales - siempre enviar pero pueden ser string vacío
+    datosLimpios.Direccion = datos.direccion || '';
+    datosLimpios.Alergias = datos.alergias || '';
+
+    return datosLimpios;
   }
 }

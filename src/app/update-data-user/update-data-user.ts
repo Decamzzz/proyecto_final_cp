@@ -57,16 +57,16 @@ export class ActualizacionDatosComponent implements OnInit {
     private authService: AuthUserService,
     private messageService: MessageService
   ) {
-    this.actualizacionForm = this.fb.group({
-      correo: ['', [Validators.required, Validators.email]],
-      contrasenaActual: ['', [Validators.required]],
-      nuevaContrasena: ['', [Validators.minLength(8)]],
-      confirmarContrasena: [''],
-      telefono: ['', [Validators.required]],
-      direccion: [''],
-      alergias: ['']
-    }, { validators: this.passwordMatchValidator });
-  }
+      this.actualizacionForm = this.fb.group({
+        correo: ['', [Validators.required, Validators.email]],
+        contrasenaActual: ['', [Validators.required]],
+        nuevaContrasena: ['', [Validators.minLength(8)]],
+        confirmarContrasena: [''],
+        telefono: ['', [Validators.required]], // Asegurar que no sea undefined
+        direccion: [''],
+        alergias: ['']
+      }, { validators: this.passwordMatchValidator });
+    }
 
   ngOnInit() {
     this.cargarDatosUsuario();
@@ -108,15 +108,15 @@ export class ActualizacionDatosComponent implements OnInit {
 
       const formData = { ...this.actualizacionForm.value };
       
-      // Preparar datos para enviar
+      // Preparar datos para enviar - asegurar que todos los campos tengan valor
       const datosActualizacion = {
         id: this.usuarioActual.id,
-        correo: formData.correo,
+        correo: formData.correo?.trim() || '',
         contrasenaActual: formData.contrasenaActual,
-        nuevaContrasena: formData.nuevaContrasena || null, // Solo enviar si se cambió
-        telefono: formData.telefono,
-        direccion: formData.direccion || '',
-        alergias: formData.alergias || ''
+        nuevaContrasena: formData.nuevaContrasena?.trim() || '',
+        telefono: formData.telefono?.trim() || '',
+        direccion: formData.direccion?.trim() || '',
+        alergias: formData.alergias?.trim() || ''
       };
 
       console.log('Datos para actualizar:', datosActualizacion);
@@ -128,10 +128,10 @@ export class ActualizacionDatosComponent implements OnInit {
             this.showSuccess(response.message);
             // Actualizar datos locales
             if (this.usuarioActual) {
-              this.usuarioActual.correo = formData.correo;
-              this.usuarioActual.telefono = formData.telefono;
-              this.usuarioActual.direccion = formData.direccion;
-              this.usuarioActual.alergias = formData.alergias;
+              this.usuarioActual.correo = datosActualizacion.correo;
+              this.usuarioActual.telefono = datosActualizacion.telefono;
+              this.usuarioActual.direccion = datosActualizacion.direccion;
+              this.usuarioActual.alergias = datosActualizacion.alergias;
             }
             setTimeout(() => {
               this.router.navigate(['/paciente-dashboard']);
@@ -142,10 +142,12 @@ export class ActualizacionDatosComponent implements OnInit {
         },
         error: (error) => {
           this.isLoading = false;
-          console.error('Error en actualización:', error);
+          console.error('Error completo en actualización:', error);
           
           if (error.error && error.error.message) {
             this.showError(error.error.message);
+          } else if (error.status === 404) {
+            this.showError('Endpoint no encontrado. Verifica la URL del servidor.');
           } else {
             this.showError('Error del servidor. Intenta más tarde.');
           }

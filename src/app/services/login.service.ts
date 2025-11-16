@@ -34,15 +34,23 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
-  // Guardar usuario en localStorage
   private guardarUsuarioEnStorage(user: any, rol: string): void {
     const usuarioData = {
-      ...user,
+      id: user.Id || user.id, // Asegurar que tenga id
+      numeroIdentificacion: user.NumeroIdentificacion || user.numeroIdentificacion,
+      nombres: user.Nombres || user.nombres,
+      apellidos: user.Apellidos || user.apellidos,
+      correo: user.Correo || user.correo,
+      telefono: user.Telefono || user.telefono,
+      direccion: user.Direccion || user.direccion,
+      alergias: user.Alergias || user.alergias,
       rol: rol,
       fechaLogin: new Date().toISOString()
     };
+    
+    console.log('🔍 DEBUG - Guardando usuario en storage:', usuarioData);
     localStorage.setItem('usuarioActual', JSON.stringify(usuarioData));
-  }
+}
 
   // Obtener usuario del localStorage
   getUsuarioActual(): any {
