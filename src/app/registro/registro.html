@@ -240,6 +240,7 @@
                 placeholder="Selecciona tu género"
                 optionLabel="label"
                 styleClass="w-full"
+                optionValue="value"
               ></p-select>
               <small 
                 *ngIf="registroForm.get('genero')?.invalid && registroForm.get('genero')?.touched" 
@@ -266,6 +267,7 @@
                 placeholder="Selecciona grupo sanguíneo"
                 optionLabel="label"
                 styleClass="w-full"
+                optionValue="value"
               ></p-select>
               <small 
                 *ngIf="registroForm.get('grupoSanguineo')?.invalid && registroForm.get('grupoSanguineo')?.touched" 
@@ -331,6 +333,9 @@
               class="p-button-lg volver-button"
               (click)="onVolver()"
             >
+
+            <p-toast></p-toast>
+
             </button>
           </div>
         </form>

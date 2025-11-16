@@ -1,0 +1,215 @@
+<div class="registro-container">
+  <div class="registro-content">
+    <!-- Sección del formulario -->
+    <div class="form-section">
+      <div class="form-container">
+        <div class="form-header">
+          <h2>Actualización de Datos</h2>
+          <p>Actualiza tu información personal</p>
+        </div>
+        
+        <form [formGroup]="actualizacionForm" (ngSubmit)="onSubmit()" class="p-fluid form-grid">
+          <!-- Información del usuario (solo lectura) -->
+          <div class="user-info">
+            <div class="info-item">
+              <strong>Número de Identificación:</strong> {{ usuarioActual?.numeroIdentificacion }}
+            </div>
+            <div class="info-item">
+              <strong>Nombre:</strong> {{ usuarioActual?.nombres }} {{ usuarioActual?.apellidos }}
+            </div>
+          </div>
+
+          <!-- Correo -->
+          <div class="p-field">
+            <label for="correo" class="p-label">
+              <i class="pi pi-envelope"></i>
+              Correo Electrónico *
+            </label>
+            <input 
+              id="correo" 
+              type="email" 
+              pInputText 
+              formControlName="correo" 
+              placeholder="ejemplo@correo.com"
+              class="p-inputtext-lg" 
+            />
+            <small 
+              *ngIf="actualizacionForm.get('correo')?.invalid && actualizacionForm.get('correo')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="actualizacionForm.get('correo')?.errors?.['required']">
+                El correo es obligatorio
+              </span>
+              <span *ngIf="actualizacionForm.get('correo')?.errors?.['email']">
+                Ingresa un correo válido
+              </span>
+            </small>
+          </div>
+
+          <!-- Contraseña actual -->
+          <div class="p-field">
+            <label for="contrasenaActual" class="p-label">
+              <i class="pi pi-lock"></i>
+              Contraseña Actual *
+            </label>
+            <div class="password-group">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                pInputText 
+                formControlName="contrasenaActual" 
+                placeholder="Ingresa tu contraseña actual"
+                class="p-inputtext-lg" 
+              />
+              <button
+                type="button" 
+                pButton 
+                icon="pi {{ showPassword ? 'pi-eye-slash' : 'pi-eye' }}" 
+                class="p-button-text toggle-password"
+                (click)="togglePasswordVisibility()"
+              >
+              </button>
+            </div>
+            <small 
+              *ngIf="actualizacionForm.get('contrasenaActual')?.invalid && actualizacionForm.get('contrasenaActual')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="actualizacionForm.get('contrasenaActual')?.errors?.['required']">
+                La contraseña actual es obligatoria
+              </span>
+            </small>
+          </div>
+
+          <!-- Nueva contraseña -->
+          <div class="form-row">
+            <div class="p-field p-col-6">
+              <label for="nuevaContrasena" class="p-label">
+                <i class="pi pi-lock"></i>
+                Nueva Contraseña
+              </label>
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                pInputText 
+                formControlName="nuevaContrasena" 
+                placeholder="Dejar en blanco para no cambiar"
+                class="p-inputtext-lg" 
+              />
+              <small 
+                *ngIf="actualizacionForm.get('nuevaContrasena')?.invalid && actualizacionForm.get('nuevaContrasena')?.touched" 
+                class="p-error"
+              >
+                <span *ngIf="actualizacionForm.get('nuevaContrasena')?.errors?.['minlength']">
+                  Mínimo 8 caracteres
+                </span>
+              </small>
+            </div>
+
+            <div class="p-field p-col-6">
+              <label for="confirmarContrasena" class="p-label">
+                Confirmar Nueva Contraseña
+              </label>
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                pInputText 
+                formControlName="confirmarContrasena" 
+                placeholder="Confirmar nueva contraseña"
+                class="p-inputtext-lg" 
+              />
+              <small 
+                *ngIf="actualizacionForm.get('confirmarContrasena')?.invalid && actualizacionForm.get('confirmarContrasena')?.touched" 
+                class="p-error"
+              >
+                <span *ngIf="actualizacionForm.get('confirmarContrasena')?.errors?.['passwordMismatch']">
+                  Las contraseñas no coinciden
+                </span>
+              </small>
+            </div>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="p-field">
+            <label for="telefono" class="p-label">
+              <i class="pi pi-phone"></i>
+              Teléfono *
+            </label>
+            <input 
+              id="telefono" 
+              type="text" 
+              pInputText 
+              formControlName="telefono" 
+              placeholder="Número de teléfono"
+              class="p-inputtext-lg" 
+            />
+            <small 
+              *ngIf="actualizacionForm.get('telefono')?.invalid && actualizacionForm.get('telefono')?.touched" 
+              class="p-error"
+            >
+              <span *ngIf="actualizacionForm.get('telefono')?.errors?.['required']">
+                El teléfono es obligatorio
+              </span>
+            </small>
+          </div>
+
+          <!-- Dirección -->
+          <div class="p-field">
+            <label for="direccion" class="p-label">
+              <i class="pi pi-home"></i>
+              Dirección
+            </label>
+            <input 
+              id="direccion" 
+              type="text" 
+              pInputText 
+              formControlName="direccion" 
+              placeholder="Dirección (opcional)"
+              class="p-inputtext-lg" 
+            />
+          </div>
+
+          <!-- Alergias -->
+          <div class="p-field">
+            <label for="alergias" class="p-label">
+              <i class="pi pi-info-circle"></i>
+              Alergias Conocidas
+            </label>
+            <textarea
+              id="alergias"
+              pInputTextarea
+              formControlName="alergias"
+              placeholder="Lista tus alergias conocidas (opcional)"
+              [rows]="3"
+              class="p-inputtext-lg"
+            ></textarea>
+          </div>
+
+          <!-- Botones -->
+          <div class="buttons-container">
+            <button
+              pButton 
+              type="submit" 
+              [label]="isLoading ? 'Actualizando...' : 'Actualizar Datos'" 
+              class="p-button-lg actualizar-button"
+              [disabled]="actualizacionForm.invalid || isLoading"
+            >
+              <i *ngIf="isLoading" class="pi pi-spin pi-spinner" style="margin-right: 0.5rem"></i>
+            </button>
+
+            <p-divider align="center">
+              <span class="p-tag">o</span>
+            </p-divider>
+
+            <button 
+              pButton 
+              type="button" 
+              label="Volver al Dashboard" 
+              class="p-button-lg volver-button"
+              (click)="onVolver()"
+            >
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-toast></p-toast>

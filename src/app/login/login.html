@@ -40,17 +40,26 @@
             </small>
 
             <hr>
+            
+            <div>
+              <p>
+               Aclaracion: Ingrese su numero de identificacion si va a ingresar como paciente, su numero de tarjeta profesional
+               si va a ingresar como medico o su ID especial si va a ingresar como administrador
+             </p>
+            </div>
+
+            <br>
 
             <label for="usuario" class="p-label">
               <i class="pi pi-id-card"></i>
-              Numero de identificación
+              Numero de identificacion, tarjeta profesional o ID
             </label>
             <input 
                 id="usuario" 
                 type="text" 
                 pInputText 
                 formControlName="usuario" 
-                placeholder="Ingresa tu numero de identificación"
+                placeholder="Numero de identificacion, tarjeta profesional o ID"
                 class="p-inputtext-lg" />
             <small 
               *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched" 
