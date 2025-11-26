@@ -4,44 +4,41 @@
     <div class="form-section">
       <div class="form-container">
         <div class="form-header">
-          <h2>Actualización de Datos</h2>
-          <p>Actualiza tu información personal</p>
+          <h2>Actualización de Datos de Administrador</h2>
+          <p>Actualiza tu información de acceso</p>
         </div>
         
         <form [formGroup]="actualizacionForm" (ngSubmit)="onSubmit()" class="p-fluid form-grid">
-          <!-- Información del usuario (solo lectura) -->
+          <!-- Información actual (solo lectura) -->
           <div class="user-info">
             <div class="info-item">
-              <strong>Número de Identificación:</strong> {{ usuarioActual?.numeroIdentificacion }}
-            </div>
-            <div class="info-item">
-              <strong>Nombre:</strong> {{ usuarioActual?.nombres }} {{ usuarioActual?.apellidos }}
+              <strong>Usuario Actual:</strong> {{ adminActual?.Username }}
             </div>
           </div>
 
-          <!-- Correo -->
+          <!-- Nuevo Username -->
           <div class="p-field">
-            <label for="correo" class="p-label">
-              <i class="pi pi-envelope"></i>
-              Correo Electrónico *
+            <label for="username" class="p-label">
+              <i class="pi pi-user"></i>
+              Nuevo Nombre de Usuario *
             </label>
             <input 
-              id="correo" 
-              type="email" 
+              id="username" 
+              type="text" 
               pInputText 
-              formControlName="correo" 
-              placeholder="ejemplo@correo.com"
+              formControlName="username" 
+              placeholder="Nuevo nombre de usuario"
               class="p-inputtext-lg" 
             />
             <small 
-              *ngIf="actualizacionForm.get('correo')?.invalid && actualizacionForm.get('correo')?.touched" 
+              *ngIf="actualizacionForm.get('username')?.invalid && actualizacionForm.get('username')?.touched" 
               class="p-error"
             >
-              <span *ngIf="actualizacionForm.get('correo')?.errors?.['required']">
-                El correo es obligatorio
+              <span *ngIf="actualizacionForm.get('username')?.errors?.['required']">
+                El nombre de usuario es obligatorio
               </span>
-              <span *ngIf="actualizacionForm.get('correo')?.errors?.['email']">
-                Ingresa un correo válido
+              <span *ngIf="actualizacionForm.get('username')?.errors?.['minlength']">
+                Mínimo 3 caracteres
               </span>
             </small>
           </div>
@@ -123,54 +120,6 @@
                 </span>
               </small>
             </div>
-          </div>
-
-          <!-- Teléfono -->
-          <div class="p-field">
-            <label for="telefono" class="p-label">
-              <i class="pi pi-phone"></i>
-              Teléfono *
-            </label>
-            <input 
-              id="telefono" 
-              type="text" 
-              pInputText 
-              formControlName="telefono" 
-              placeholder="Número de teléfono"
-              class="p-inputtext-lg" 
-            />
-          </div>
-
-          <!-- Dirección -->
-          <div class="p-field">
-            <label for="direccion" class="p-label">
-              <i class="pi pi-home"></i>
-              Dirección
-            </label>
-            <input 
-              id="direccion" 
-              type="text" 
-              pInputText 
-              formControlName="direccion" 
-              placeholder="Dirección (opcional)"
-              class="p-inputtext-lg" 
-            />
-          </div>
-
-          <!-- Alergias -->
-          <div class="p-field">
-            <label for="alergias" class="p-label">
-              <i class="pi pi-info-circle"></i>
-              Alergias Conocidas
-            </label>
-            <textarea
-              id="alergias"
-              pInputTextarea
-              formControlName="alergias"
-              placeholder="Lista tus alergias conocidas (opcional)"
-              [rows]="3"
-              class="p-inputtext-lg"
-            ></textarea>
           </div>
 
           <!-- Botones -->

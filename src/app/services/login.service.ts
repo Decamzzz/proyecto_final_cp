@@ -19,8 +19,11 @@ export class LoginService {
       Password: contrasena,
       Rol: rol
     };
+    console.log('🔍 DEBUG - Enviando al backend:', body);
     return this.http.post(`${this.apiUrl}/login`, body).pipe(
       tap((response: any) => {
+        console.log('🔍 DEBUG - Respuesta COMPLETA del backend:', response);
+        console.log('🔍 DEBUG - User object recibido:', response.user);
         if (response.success) {
           // Guardar información del usuario en localStorage
           this.guardarUsuarioEnStorage(response.user, rol);
@@ -38,6 +41,10 @@ export class LoginService {
     const usuarioData = {
       id: user.Id || user.id, // Asegurar que tenga id
       numeroIdentificacion: user.NumeroIdentificacion || user.numeroIdentificacion,
+      numeroTarjetaProfesional: user.NumeroTarjetaProfesional || user.numeroTarjetaProfesional,
+      especialidad: user.Especialidad || user.especialidad,
+      consultorio: user.Consultorio || user.consultorio,
+      Username: user.Username || user.username,
       nombres: user.Nombres || user.nombres,
       apellidos: user.Apellidos || user.apellidos,
       correo: user.Correo || user.correo,

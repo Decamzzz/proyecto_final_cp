@@ -76,9 +76,12 @@ export class LoginComponent {
           
           if (response.success) {
             this.showSuccess('Login exitoso!');
+
+            setTimeout(() => {
+              this.redirigirSegunRol(seleccionRol);
+            }, 1500);
             
             // Redirigir según el rol seleccionado
-            this.redirigirSegunRol(seleccionRol);
           } else {
             this.showError(response.message || 'Error en el login');
           }

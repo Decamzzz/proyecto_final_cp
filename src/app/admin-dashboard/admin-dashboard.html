@@ -1,1 +1,63 @@
-<p>admin-dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="welcome-section">
+      <h1>Panel de Administración</h1>
+      <p>Bienvenido</p>
+    </div>
+    <div class="user-info">
+      <span>ID: {{ usuarioActual?.Username || usuarioActual?.Username || 'No disponible' }}</span>
+      <button 
+        pButton 
+        icon="pi pi-sign-out" 
+        label="Cerrar Sesión" 
+        class="p-button-outlined p-button-secondary"
+        (click)="cerrarSesion()">
+      </button>
+    </div>
+  </div>
+
+  <!-- Tarjetas de Funcionalidades -->
+  <div class="dashboard-cards">
+    <!-- Registrar Médico -->
+    <p-card class="dashboard-card" header="Registrar Médico">
+      <div class="card-content">
+        <p>Agregar nuevos médicos al sistema.</p>
+      </div>
+      <ng-template #header>
+        <img alt="Card" src="https://static.vecteezy.com/system/resources/previews/002/744/873/non_2x/medical-records-illustration-vector.jpg" width="400" height="250"/>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          icon="pi pi-user-plus" 
+          label="Registrar Médico" 
+          class="p-button-success"
+          (click)="irARegistroMedico()">
+        </button>
+      </ng-template>
+    </p-card>
+
+    <p-card class="dashboard-card" header="Actualización de datos">
+      <div class="card-content">
+        <p>Actualiza tus datos</p>
+      </div>
+      <ng-template #header>
+        <img alt="Card" src="https://cdn.le-vpn.com/es/wp-content/uploads/2022/06/What-Private-Data-is-Safe-to-Keep-on-the-Cloud-1200x628-1.jpg" width="400" height="250"/>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          icon="pi pi-user-edit" 
+          label="Actualizar Datos" 
+          class="p-button-help"
+          (click)="actualizarDatos()">
+        </button>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <!-- Components de PrimeNG -->
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+</div>

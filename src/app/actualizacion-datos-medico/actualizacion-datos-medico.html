@@ -4,18 +4,21 @@
     <div class="form-section">
       <div class="form-container">
         <div class="form-header">
-          <h2>Actualización de Datos</h2>
-          <p>Actualiza tu información personal</p>
+          <h2>Actualización de Datos Médicos</h2>
+          <p>Actualiza tu información profesional</p>
         </div>
         
         <form [formGroup]="actualizacionForm" (ngSubmit)="onSubmit()" class="p-fluid form-grid">
-          <!-- Información del usuario (solo lectura) -->
+          <!-- Información del médico (solo lectura) -->
           <div class="user-info">
             <div class="info-item">
-              <strong>Número de Identificación:</strong> {{ usuarioActual?.numeroIdentificacion }}
+              <strong>Número de Identificación:</strong> {{ medicoActual?.numeroIdentificacion }}
             </div>
             <div class="info-item">
-              <strong>Nombre:</strong> {{ usuarioActual?.nombres }} {{ usuarioActual?.apellidos }}
+              <strong>Nombre:</strong> Dr. {{ medicoActual?.nombres }} {{ medicoActual?.apellidos }}
+            </div>
+            <div class="info-item">
+              <strong>Tarjeta Profesional:</strong> {{ medicoActual?.numeroTarjetaProfesional }}
             </div>
           </div>
 
@@ -136,41 +139,25 @@
               type="text" 
               pInputText 
               formControlName="telefono" 
-              placeholder="Número de teléfono"
+              placeholder="Número de teléfono de contacto"
               class="p-inputtext-lg" 
             />
           </div>
 
-          <!-- Dirección -->
+          <!-- Consultorio -->
           <div class="p-field">
-            <label for="direccion" class="p-label">
-              <i class="pi pi-home"></i>
-              Dirección
+            <label for="consultorio" class="p-label">
+              <i class="pi pi-building"></i>
+              Consultorio *
             </label>
             <input 
-              id="direccion" 
+              id="consultorio" 
               type="text" 
               pInputText 
-              formControlName="direccion" 
-              placeholder="Dirección (opcional)"
+              formControlName="consultorio" 
+              placeholder="Ubicación del consultorio"
               class="p-inputtext-lg" 
             />
-          </div>
-
-          <!-- Alergias -->
-          <div class="p-field">
-            <label for="alergias" class="p-label">
-              <i class="pi pi-info-circle"></i>
-              Alergias Conocidas
-            </label>
-            <textarea
-              id="alergias"
-              pInputTextarea
-              formControlName="alergias"
-              placeholder="Lista tus alergias conocidas (opcional)"
-              [rows]="3"
-              class="p-inputtext-lg"
-            ></textarea>
           </div>
 
           <!-- Botones -->

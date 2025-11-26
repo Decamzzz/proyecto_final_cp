@@ -19,6 +19,17 @@ export class ActualizacionUserService {
     return this.http.put(`${this.apiUrl}/actualizar`, datosLimpios);
   }
 
+    eliminarCuenta(usuarioId: number, contrasena: string): Observable<any> {
+    const requestBody = {
+      Contrasena: contrasena
+    };
+    
+    console.log('Eliminando cuenta para usuario ID:', usuarioId);
+    return this.http.delete(`${this.apiUrl}/eliminar/${usuarioId}`, { 
+      body: requestBody 
+    });
+  }
+
   private limpiarDatosActualizacion(datos: any): any {
     const datosLimpios: any = {
       Id: datos.id,

@@ -21,18 +21,18 @@
                 id="nombres" 
                 type="text" 
                 pInputText 
-                formControlName="nombres" 
+                formControlName="Nombres" 
                 placeholder="Ingresa tus nombres"
                 class="p-inputtext-lg" 
               />
               <small 
-                *ngIf="registroForm.get('nombres')?.invalid && registroForm.get('nombres')?.touched" 
+                *ngIf="registroForm.get('Nombres')?.invalid && registroForm.get('Nombres')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('nombres')?.errors?.['required']">
+                <span *ngIf="registroForm.get('Nombres')?.errors?.['required']">
                   Los nombres son obligatorios
                 </span>
-                <span *ngIf="registroForm.get('nombres')?.errors?.['minlength']">
+                <span *ngIf="registroForm.get('Nombres')?.errors?.['minlength']">
                   Mínimo 2 caracteres
                 </span>
               </small>
@@ -46,18 +46,18 @@
                 id="apellidos" 
                 type="text" 
                 pInputText 
-                formControlName="apellidos" 
+                formControlName="Apellidos" 
                 placeholder="Ingresa tus apellidos"
                 class="p-inputtext-lg" 
               />
               <small 
-                *ngIf="registroForm.get('apellidos')?.invalid && registroForm.get('apellidos')?.touched" 
+                *ngIf="registroForm.get('Apellidos')?.invalid && registroForm.get('Apellidos')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('apellidos')?.errors?.['required']">
+                <span *ngIf="registroForm.get('Apellidos')?.errors?.['required']">
                   Los apellidos son obligatorios
                 </span>
-                <span *ngIf="registroForm.get('apellidos')?.errors?.['minlength']">
+                <span *ngIf="registroForm.get('Apellidos')?.errors?.['minlength']">
                   Mínimo 2 caracteres
                 </span>
               </small>
@@ -74,18 +74,18 @@
               id="correo" 
               type="email" 
               pInputText 
-              formControlName="correo" 
+              formControlName="Correo" 
               placeholder="ejemplo@correo.com"
               class="p-inputtext-lg" 
             />
             <small 
-              *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched" 
+              *ngIf="registroForm.get('Correo')?.invalid && registroForm.get('Correo')?.touched" 
               class="p-error"
             >
-              <span *ngIf="registroForm.get('correo')?.errors?.['required']">
+              <span *ngIf="registroForm.get('Correo')?.errors?.['required']">
                 El correo es obligatorio
               </span>
-              <span *ngIf="registroForm.get('correo')?.errors?.['email']">
+              <span *ngIf="registroForm.get('Correo')?.errors?.['email']">
                 Ingresa un correo válido
               </span>
             </small>
@@ -102,7 +102,7 @@
                 <input 
                   [type]="showPassword ? 'text' : 'password'" 
                   pInputText 
-                  formControlName="contrasena" 
+                  formControlName="Contrasena" 
                   placeholder="Mínimo 8 caracteres"
                   class="p-inputtext-lg" 
                 />
@@ -116,13 +116,13 @@
                 </button>
               </div>
               <small 
-                *ngIf="registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched" 
+                *ngIf="registroForm.get('Contrasena')?.invalid && registroForm.get('Contrasena')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('contrasena')?.errors?.['required']">
+                <span *ngIf="registroForm.get('Contrasena')?.errors?.['required']">
                   La contraseña es obligatoria
                 </span>
-                <span *ngIf="registroForm.get('contrasena')?.errors?.['minlength']">
+                <span *ngIf="registroForm.get('Contrasena')?.errors?.['minlength']">
                   Mínimo 8 caracteres
                 </span>
               </small>
@@ -135,18 +135,18 @@
               <input 
                 [type]="showPassword ? 'text' : 'password'" 
                 pInputText 
-                formControlName="confirmarContrasena" 
+                formControlName="ConfirmarContrasena" 
                 placeholder="Confirma tu contraseña"
                 class="p-inputtext-lg" 
               />
               <small 
-                *ngIf="registroForm.get('confirmarContrasena')?.invalid && registroForm.get('confirmarContrasena')?.touched" 
+                *ngIf="registroForm.get('ConfirmarContrasena')?.invalid && registroForm.get('ConfirmarContrasena')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('confirmarContrasena')?.errors?.['required']">
+                <span *ngIf="registroForm.get('ConfirmarContrasena')?.errors?.['required']">
                   Confirma tu contraseña
                 </span>
-                <span *ngIf="registroForm.get('confirmarContrasena')?.errors?.['passwordMismatch']">
+                <span *ngIf="registroForm.get('ConfirmarContrasena')?.errors?.['passwordMismatch']">
                   Las contraseñas no coinciden
                 </span>
               </small>
@@ -164,15 +164,15 @@
                 id="numeroIdentificacion" 
                 type="text" 
                 pInputText 
-                formControlName="numeroIdentificacion" 
+                formControlName="NumeroIdentificacion" 
                 placeholder="Número de identificación"
                 class="p-inputtext-lg" 
               />
               <small 
-                *ngIf="registroForm.get('numeroIdentificacion')?.invalid && registroForm.get('numeroIdentificacion')?.touched" 
+                *ngIf="registroForm.get('NumeroIdentificacion')?.invalid && registroForm.get('NumeroIdentificacion')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('numeroIdentificacion')?.errors?.['required']">
+                <span *ngIf="registroForm.get('NumeroIdentificacion')?.errors?.['required']">
                   El número de identificación es obligatorio
                 </span>
               </small>
@@ -187,15 +187,15 @@
                 id="numeroTarjetaProfesional" 
                 type="text" 
                 pInputText 
-                formControlName="numeroTarjetaProfesional"
+                formControlName="NumeroTarjetaProfesional"
                 placeholder="Número de tarjeta profesional"
                 class="p-inputtext-lg" 
               />
               <small
-                *ngIf="registroForm.get('numeroTarjetaProfesional')?.invalid && registroForm.get('numeroTarjetaProfesional')?.touched" 
+                *ngIf="registroForm.get('NumeroTarjetaProfesional')?.invalid && registroForm.get('NumeroTarjetaProfesional')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('numeroTarjetaProfesional')?.errors?.['required']">
+                <span *ngIf="registroForm.get('NumeroTarjetaProfesional')?.errors?.['required']">
                   El número de tarjeta profesional es obligatorio
                 </span>
               </small>
@@ -210,15 +210,15 @@
                 id="telefono" 
                 type="text" 
                 pInputText 
-                formControlName="telefono" 
+                formControlName="Telefono" 
                 placeholder="Número de teléfono"
                 class="p-inputtext-lg" 
               />
               <small 
-                *ngIf="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched" 
+                *ngIf="registroForm.get('Telefono')?.invalid && registroForm.get('Telefono')?.touched" 
                 class="p-error"
               >
-                <span *ngIf="registroForm.get('telefono')?.errors?.['required']">
+                <span *ngIf="registroForm.get('Telefono')?.errors?.['required']">
                   El teléfono es obligatorio
                 </span>
               </small>
@@ -234,15 +234,15 @@
                     id="consultorio" 
                     type="text" 
                     pInputText 
-                    formControlName="consultorio"
+                    formControlName="Consultorio"
                     placeholder="Consultorio"
                     class="p-inputtext-lg" 
                 />
                 <small
-                    *ngIf="registroForm.get('consultorio')?.invalid && registroForm.get('consultorio')?.touched" 
+                    *ngIf="registroForm.get('Consultorio')?.invalid && registroForm.get('Consultorio')?.touched" 
                     class="p-error"
                 >
-                    <span *ngIf="registroForm.get('consultorio')?.errors?.['required']">
+                    <span *ngIf="registroForm.get('Consultorio')?.errors?.['required']">
                     El consultorio es obligatorio
                     </span>
                 </small>
@@ -257,8 +257,8 @@
                     id="especializacion" 
                     type="text" 
                     pInputText 
-                    formControlName="especializacion"
-                    placeholder="Especializacion (opcional)"
+                    formControlName="Especialidad"
+                    placeholder="Especializacion"
                     class="p-inputtext-lg" 
                 />
             </div>
@@ -268,7 +268,7 @@
             <button
               pButton 
               type="submit" 
-              label="Registrarse" 
+              label="Registrar médico"
               class="p-button-lg register-button"
               [disabled]="registroForm.invalid"
             >
@@ -281,7 +281,7 @@
             <button 
               pButton 
               type="button" 
-              label="Volver al Login" 
+              label="Volver al DashBoard" 
               class="p-button-lg volver-button"
               (click)="onVolver()"
             >
@@ -292,3 +292,4 @@
     </div>
   </div>
 </div>
+<p-toast></p-toast>

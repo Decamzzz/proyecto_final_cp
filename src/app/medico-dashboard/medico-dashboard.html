@@ -1,1 +1,168 @@
-<p>medico-dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="welcome-section">
+      <h1>Bienvenido, Dr. {{ getNombreCompleto() }}</h1>
+      <p>Panel de gestión médica y consultas</p>
+    </div>
+    <div class="user-info">
+      <span>Tarjeta Profesional: {{ usuarioActual?.numeroTarjetaProfesional }}</span>
+      <button 
+        pButton 
+        icon="pi pi-sign-out" 
+        label="Cerrar Sesión" 
+        class="p-button-outlined p-button-secondary"
+        (click)="cerrarSesion()">
+      </button>
+    </div>
+  </div>
+
+  <!-- Tarjetas de Funcionalidades -->
+  <div class="dashboard-cards">
+    <!-- Actualizar Datos -->
+    <p-card class="dashboard-card" header="Actualizar Datos Profesionales">
+      <div class="card-content">
+        <p>Modifica tu información profesional y de contacto</p>
+      </div>
+      <ng-template #header>
+        <img alt="Card" src="https://cdn.le-vpn.com/es/wp-content/uploads/2022/06/What-Private-Data-is-Safe-to-Keep-on-the-Cloud-1200x628-1.jpg" width="400" height="250"/>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          icon="pi pi-user-edit"
+          label="Actualizar Datos" 
+          class="p-button-primary"
+          (click)="irAActualizarDatos()">
+        </button>
+      </ng-template>
+    </p-card>
+
+    <!-- Gestión de Citas Médicas -->
+    <p-card class="dashboard-card" header="Gestión de Citas">
+      <div class="card-content">
+        <p>Consulta y gestiona tus citas médicas programadas</p>
+      </div>
+      <ng-template #header>
+        <img alt="Card" src="https://media.istockphoto.com/id/1307098713/es/foto/cierre-el-calendario-del-escritorio-de-papel-blanco-con-una-cita-de-fondo-borrosa-y-un.jpg?s=612x612&w=0&k=20&c=Z0qmfSrfKS_AaAxr6rGKGhyjKnRvYPIC5lKOKYmUug0=" width="400" height="250"/>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          icon="pi pi-calendar-plus" 
+          label="Gestionar Citas" 
+          class="p-button-help"
+          (click)="gestionarCitas()">
+        </button>
+      </ng-template>
+    </p-card>
+
+    <!-- Eliminar Cuenta -->
+    <p-card class="dashboard-card" header="Eliminar Cuenta Médica">
+      <div class="card-content">
+        <p>Elimina permanentemente tu cuenta médica</p>
+      </div>
+      <ng-template #header>
+        <img alt="Card" src="https://www.shutterstock.com/image-vector/delete-file-concept-clean-junk-600nw-2528870183.jpg" width="400" height="250"/>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          icon="pi pi-trash" 
+          label="Eliminar Cuenta" 
+          class="p-button-danger"
+          (click)="solicitarEliminarCuenta()">
+        </button>
+      </ng-template>
+    </p-card>
+  </div>
+
+  <!-- Información Profesional -->
+  <div class="quick-info">
+    <p-card header="Información Profesional">
+      <div class="info-grid">
+        <div class="info-item">
+          <strong>Correo:</strong> {{ usuarioActual?.correo }}
+        </div>
+        <div class="info-item">
+          <strong>Teléfono:</strong> {{ usuarioActual?.telefono }}
+        </div>
+        <div class="info-item">
+          <strong>Especialidad:</strong> {{ usuarioActual?.especialidad || 'No especificada' }}
+        </div>
+        <div class="info-item">
+          <strong>Consultorio:</strong> {{ usuarioActual?.consultorio || 'No asignado' }}
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<!-- Dialog para Eliminar Cuenta -->
+<p-dialog 
+  header="Confirmar Eliminación de Cuenta Médica" 
+  [(visible)]="showEliminarDialog"
+  [modal]="true" 
+  [style]="{ width: '500px' }"
+  [closable]="!eliminando"
+  (onHide)="cerrarDialogEliminar()">
+  
+  <div class="delete-dialog-content">
+    <div class="warning-message">
+      <i class="pi pi-exclamation-triangle" style="color: #e74c3c; font-size: 2rem; margin-right: 1rem;"></i>
+      <div>
+        <h3 style="color: #e74c3c; margin: 0 0 0.5rem 0;">¡Advertencia Importante!</h3>
+        <p style="margin: 0;">Esta acción eliminará permanentemente tu cuenta médica:</p>
+        <ul style="margin: 0.5rem 0 0 1rem;">
+          <li>Tu perfil médico completo</li>
+          <li>Toda tu información profesional</li>
+          <li>Todas las citas médicas asociadas</li>
+          <li>El historial de consultas con pacientes</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="password-confirm" style="margin-top: 1.5rem;">
+      <label for="contrasenaConfirmacion">
+        <strong style="color: white;">Para confirmar, ingresa tu contraseña:</strong>
+      </label>
+      <input 
+        id="contrasenaConfirmacion"
+        type="password" 
+        pInputText 
+        [(ngModel)]="contrasenaConfirmacion"
+        placeholder="Tu contraseña actual"
+        [disabled]="eliminando"
+        style="width: 100%; margin-top: 0.5rem;" />
+    </div>
+
+    <!-- Loading durante eliminación -->
+    <div *ngIf="eliminando" class="eliminando-loading">
+      <i class="pi pi-spin pi-spinner" style="margin-right: 0.5rem;"></i>
+      <span>Eliminando cuenta médica y datos asociados...</span>
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Cancelar" 
+      icon="pi pi-times" 
+      class="p-button-text"
+      [disabled]="eliminando"
+      (click)="cerrarDialogEliminar()">
+    </button>
+    <button 
+      pButton 
+      label="{{ eliminando ? 'Eliminando...' : 'Eliminar Cuenta Definitivamente' }}" 
+      icon="pi pi-trash" 
+      class="p-button-danger"
+      [disabled]="eliminando || !contrasenaConfirmacion"
+      (click)="eliminarCuenta()">
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Components de PrimeNG -->
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
